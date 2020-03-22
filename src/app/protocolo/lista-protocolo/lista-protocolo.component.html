@@ -1,0 +1,19 @@
+<h3>{{titulo}}</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Título</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngFor="let protocolo of protocolos; let i = index;">
+          <td>{{ protocolo.id }}</td>        
+          <td>{{ protocolo.titulo }}</td>
+        </tr>
+        <tr>
+           <td colspan="6" style="text-align: right;">Total de Registros: {{ protocolos.length }}</td> 
+        </tr>
+    </tbody>
+</table>
