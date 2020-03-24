@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ConfigService } from './config.service';
-import { Observable } from 'rxjs';
-import { Usuario } from '../models/usuario';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private baseUrlService:string = '';
-  private headers: HttpHeaders;
+  private _usuario: BehaviorSubject<Usuario>;
+  public readonly usuario$: Observable<Usuario>;
 
-    constructor(private httpClient: HttpClient,
-                private configService: ConfigService) { 
-        
-        /**SETANDO A URL DO SERVIÇO REST QUE VAI SER ACESSADO */
-        this.baseUrlService = configService.getUrlService() + '/usuario/';
+  constructor(private http: HttpClient) {
+    this._usuario = new BehaviorSubject({} as Usuario);
+    this.usuario$ = this._usuario.asObservable();
+  }
 
-        this.headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
+  setUsuario(usuario: Usuario) {
+    this._usuario.next(usuario);
+  }
 
-    }
-
-    getProtocolos() : Observable<Usuario[]>{        
-      return this.httpClient.get<Usuario[]>(this.baseUrlService);
-    } 
+  cadastrar(usuario: Usuario) {
+    const url = `${environment.baseApiUrl}/usuario`;
+    return this.http.post(url, usuario);
+  }
 }

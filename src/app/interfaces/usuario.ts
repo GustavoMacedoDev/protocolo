@@ -1,4 +1,4 @@
-export class Usuario {
+export interface Usuario {
     id: string;
     login: string;
     email: string;

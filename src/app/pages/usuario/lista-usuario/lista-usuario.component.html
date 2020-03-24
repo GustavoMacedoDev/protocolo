@@ -1,0 +1,25 @@
+<h3>{{titulo}}</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Senha</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+        <tr *ngFor="let usuario of usuarios; let i = index;">
+          <td>{{ usuario.id }}</td>        
+          <td>{{ usuario.login }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>******</td>
+          <td>{{ usuario.status }}</td>
+        </tr>
+        <tr>
+           <td colspan="6" style="text-align: right;">Total de Registros: {{ usuarios.length }}</td> 
+        </tr>
+    </tbody>
+</table>

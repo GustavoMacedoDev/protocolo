@@ -1,8 +1,4 @@
-<app-barra-navegacao (onToggle)="menuLateral.toggle()"></app-barra-navegacao>
-<div class="main">
-    <app-menu-lateral #menuLateral></app-menu-lateral>
-    <div class="content">
-        <router-outlet></router-outlet>
-    </div>
+<app-cabecalho [titulo]="titulo" *ngIf="authService.autenticado$ | async"></app-cabecalho>
+<div class="container-fluid pt-4 pb-4">
+ <router-outlet></router-outlet>
 </div>
-
